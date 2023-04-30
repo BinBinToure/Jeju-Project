@@ -19,9 +19,9 @@ Java, MySQL, JPA, Spring boot, Spring Security 등을 이용한 한달살이 정
 
 <h1>📌참여자 정보</h1> <br>
 
-이정빈
-이식
-신길호
+▶ 이정빈 <br>
+▶ 이식 <br>
+▶ 신길호 <br>
 
 <h1>📌Contributions / 맡은 역할</h1> <br>
 
