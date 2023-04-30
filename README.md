@@ -5,10 +5,10 @@
 📌Development Environment / 개발환경 <hr>
 Java, python  
 MySQL, RDS  
-HTML5/CSS3 <hr>
-javascript , Ajax , jQuery <hr>
-Spring Boot, JPA, gradle <hr>
-GIT <hr>
+HTML5/CSS3  
+javascript , Ajax , jQuery   
+Spring Boot, JPA, gradle  
+GIT  
 
 📌Project / 프로젝트
 Java, MySQL, JPA, Spring boot, Spring Security 등을 이용한 한달살이 정보를 제공하고, <hr>
