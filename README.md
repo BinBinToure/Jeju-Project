@@ -19,21 +19,19 @@ Java, MySQL, JPA, Spring boot, Spring Security 등을 이용한 한달살이 정
 
 <h1>📌참여자 정보</h1> <br>
 
-▶ 이정빈 <br>
+▶ 이정빈(팀장) <br>
 ▶ 이식 <br>
 ▶ 신길호 <br>
 
+<hr>
+
 <h1>📌Contributions / 맡은 역할</h1> <br>
 
-이정빈
-▶
+▶ 프로젝트와 DB 설계 <br>
+▶ Spring Security 활용해 회원가입과 로그인 기능, USER ADMIN으로 역할 구분 <br>
+▶ JPA 활용해 Entity와 Repository 연동, 공지사항 / 커뮤니티 게시판 / 댓글 / 별점 / 후기 기능 <br>
+▶ 찜 목록 / 상품 등록 및 관리 / 검색 기능 / 페이징 처리 <br>
+▶ Thymeleaf 활용해 웹 페이지에 내용 구현 <br>
+▶ 크롤링한 데이터 활용해 카카오맵 API 기능 구현 <br>
 
-▶
-
-▶
-
-▶
-
-▶
-
-
+<
