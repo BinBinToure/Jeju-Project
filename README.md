@@ -3,12 +3,12 @@
 <img width="242" alt="main_logo" src="https://user-images.githubusercontent.com/111488162/216569689-8437ca66-b1f5-4bf9-9c78-b1c2466cb9f7.png">
 
 <h1>📌Development Environment / 개발환경 </h1> <hr>
-Java, python <br>  
-MySQL, RDS  <br>  
-HTML5 / CSS3 <br>  
-Javascript, Ajax, jQuery <br>     
-Spring Boot, JPA, gradle <br>    
-GIT <br>  
+Java, python  <br>    
+MySQL, RDS  <br>    
+HTML5 / CSS3  <br>    
+Javascript, Ajax, jQuery  <br>     
+Spring Boot, JPA, gradle  <br>    
+GIT  <br>  
 <hr>
 
 <h1>📌Project / 프로젝트</h1> <br>  
