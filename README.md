@@ -34,4 +34,4 @@ Java, MySQL, JPA, Spring boot, Spring Security 등을 이용한 한달살이 정
 ▶ Thymeleaf 활용해 웹 페이지에 내용 구현 <br>
 ▶ 크롤링한 데이터 활용해 카카오맵 API 기능 구현 <br>
 
-<
+<hr>
