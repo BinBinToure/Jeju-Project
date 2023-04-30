@@ -5,7 +5,7 @@
 📌Development Environment / 개발환경 <hr>
 Java, python <br>  
 MySQL, RDS  <br>
-HTML5 / CSS3 <br>  
+HTML5 / CSS3 <br>
 javascript, Ajax, jQuery <br>   
 Spring Boot, JPA, gradle <br>  
 GIT <br>  
