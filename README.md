@@ -6,13 +6,15 @@
 Java, python <br>  
 MySQL, RDS  <br>  
 HTML5 / CSS3 <br>  
-javascript, Ajax, jQuery <br>     
+Javascript, Ajax, jQuery <br>     
 Spring Boot, JPA, gradle <br>    
 GIT <br>  
 <hr>
+
 📌Project / 프로젝트
-Java, MySQL, JPA, Spring boot, Spring Security 등을 이용한 한달살이 정보를 제공하고, <hr>
+Java, MySQL, JPA, Spring boot, Spring Security 등을 이용한 한달살이 정보를 제공하고,  
 이용자들간의 소통이 가능하며 필요한 물품 대여가 가능한 웹 서비스
+<hr>
 
 📌Contributions / 맡은 역할
 이정빈
