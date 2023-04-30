@@ -1,0 +1,22 @@
+package com.shop.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class BoardDTO {
+    private Long gno;
+    private String title;
+    private String content;
+    private LocalDateTime regDate, modDate;
+    private String createdBy;
+    private Long viewCount;
+
+}

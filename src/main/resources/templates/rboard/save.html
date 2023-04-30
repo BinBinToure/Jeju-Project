@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<link rel="stylesheet" href="/css/modal.css">
+<link rel="stylesheet" href="/css/board.css">
+
+<head>
+    <th:block th:replace="fragments/head :: headFragment"></th:block>
+
+    <meta charset="UTF-8">
+    <title>save</title>
+</head>
+
+<body>
+<!--헤더-->
+<th:block th:replace="fragments/header :: header"></th:block>
+
+<th:block th:fragment="content">
+
+    <th:block th:fragment="content">
+        <div class="image-box">
+
+        </div>
+        <span class="h1-wrap"></span>
+<form action="/rboard/save" method="post" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <h1 class="h1">커뮤니티 등록 페이지</h1>
+
+
+<!--  pass : <input type="text" name="boardPass"> <br>-->
+  title : <input type="text" name="rboardTitle" placeholder="제목을 입력하세요."> <br>
+
+        <!-- 작성자  -->
+        <div sec:authentication="name" name="rboardWriter"></div> <br>
+
+        contents : <textarea  class="form-control" rows="20" cols="40" name="rboardContents" ></textarea> <br>
+  file: <input type="file" name="rboardFile" multiple> <br>
+  <input type="submit" value="글쓰기" class="button" style="margin-top:20px;">
+</form>
+</body>
+<div th:replace="fragments/footer::footer"></div>
+</html>

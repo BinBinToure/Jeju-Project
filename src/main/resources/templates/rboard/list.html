@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/modal.css">
+<head>
+    <th:block th:replace="fragments/head :: headFragment"></th:block>
+</head>
+<body>
+<th:block th:replace="fragments/header :: header"></th:block>
+<table>
+    <tr>
+        <th>id</th>
+        <th>title</th>
+        <th>title(||쓰지 않은 경우)</th>
+        <th>writer</th>
+        <th>date</th>
+        <th>hits</th>
+    </tr>
+    <tr th:each="rboard : ${rboardList}">
+        <td th:text="${rboard.id}"></td>
+        <td><a th:href="@{|/rboard/${rboard.id}|}" th:text="${rboard.rboardTitle}"></a></td>
+        <td><a th:href="@{/rboard/${rboard.id}}" th:text="${rboard.rboardTitle}"></a></td>
+        <td th:text="${rboard.createdBy}"></td>
+        <td th:text="*{#temporals.format(rboard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${rboard.rboardHits}"></td>
+    </tr>
+</table>
+</body>
+</html>

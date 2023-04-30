@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<div th:fragment="header">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Jua', sans-serif;
+        }
+    </style>
+
+    <nav class="navbar1">
+        <div class="nav-container">
+            <div class="navbar-logo">
+                <a href="/"><img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/main_logo2.png"
+                                 alt="로고" /></a>
+
+            </div>
+            <ul class="navbar-menu">
+
+                <li class="course" id="course">
+                    <!--  코스헤더-->
+                    <a href="/">Where
+                        <i class="fa-solid fa-caret-down"></i>
+                    </a>
+                    <div class="sub-header" onmouseover="on()" onmouseout="off()">
+                        <ul class="ul">
+                            <li class="course"><a href="/where/stay1">1.제주시 서부권</a></li>
+                            <li class="course"><a href="/where/stay2">2.제주시</a></li>
+                            <li class="course"><a href="/where/stay3">3.제주시 동부권</a></li>
+                            <li class="course"><a href="/where/stay4">4.서귀포시 서부권</a></li>
+                            <li class="course"><a href="/where/stay5">5.서귀포시</a></li>
+                            <li class="course"><a href="/where/stay6">6.서귀포시 동부권</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li><a href="/notice/list">Review</a></li>
+
+                <li><a href="/rboard/paging">Board</a> </li>
+
+                <li><a href="/board/list">Notice</a></li>
+
+
+                <li class="shop">
+                    <a href="/goods">Rental Shop
+                        <i class="fa-solid fa-caret-down"></i>
+                    </a>
+                    <div class="sub-header2" onmouseover="on()" onmouseout="off()">
+                        <ul class="ul">
+                            <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')" class="course"><a
+                                    href="/admin/item/new">상품
+                                등록</a></li>
+                            <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')" class="course"><a href="/admin/items">상품
+                                관리</a></li>
+                            <li sec:authorize="isAuthenticated()" class="course"><a href="/cart">찜 목록</a></li>
+                            <li sec:authorize="isAuthenticated()" class="course"><a href="/orders">신청내역</a></li>
+                            <li sec:authorize="isAnonymous()" class="course"><a href="/members/login">로그인</a></li>
+                            <li sec:authorize="isAuthenticated()" class="course"><a href="/members/logout"
+                                                                                    onclick="LogoutBtn()">로그아웃</a></li>
+                            <form th:action="@{/goods}" method="get" class="searchForm">
+                                <input name="searchQuery" type="search" placeholder="상품찾기">
+                                <button type="submit" class="button">검색</button>
+                            </form>
+                        </ul>
+                    </div>
+                </li>
+
+                <a sec:authorize="isAnonymous()">
+                    <li class="icon">
+                        <span id="spin navbar-menu" onclick="doDisplay()">로그인</span>
+                        <i class="fa-regular fa-user"></i>
+                    </li>
+                </a>
+                <a sec:authorize="isAuthenticated()" th:href="@{/members/logout}">
+                    <li class="icon">
+                        <span id="spin navbar-menu" onclick="LogoutBtn()">로그아웃</span>
+                        <i class="fa-regular fa-user"></i>
+                    </li>
+                </a>
+                <a sec:authorize="isAnonymous()" th:href="@{/members/new}">
+                    <li class="icon">
+                        <span id="spin" class="icon">회원가입</span>
+                        <i class="fa-regular fa-user"></i>
+                    </li>
+                </a>
+                <a sec:authorize="hasRole('USER')" th:href="@{/info}">
+                    <li class="icon">
+                        <span id="spin" class="icon">마이페이지</span>
+                        <i class="fa-regular fa-user"></i>
+                    </li>
+                </a>
+
+            </ul>
+            <ul class="navbar-icons">
+                <!--                <li><a href="#"><i class="fa-brands fa-facebook n1"></i></a></li>-->
+                <!--                <li><a href="#"><i class="fa-brands fa-instagram n1"></i></a></li>-->
+                <!--                <li><a href="#"><i class="fa-brands fa-twitter n1"></i></a></li>-->
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <!-- 로그인 -->
+    <div class="loginForm" id="myDIV" style="display: none;">
+        <!-- Security config의 loginPage("url")와 action url과 동일하게 작성-->
+        <form role="form" method="post" action="/members/login" class="form">
+
+            <div>
+                <label th:for="email">이메일주소</label>
+                <input type="email" id="userId" name="email" placeholder="이메일을 입력해주세요" required>
+                <!--                    </div>-->
+
+                <!--                    <div>-->
+                <label th:for="passowrd">비밀번호</label>
+                <input type="password" id="userPassword" name="password" placeholder="비밀번호 입력" required>
+
+                <p th:if="${loginErrorMsg}" th:text="${loginErrorMsg}"></p>
+                <button id="header-button" onclick="requestLogin()">로그인</button>
+
+
+            </div>
+
+
+            <!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
+
+        </form>
+        <!--        <button type="button"-->
+        <!--            onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=04fd96b421779ce995221b17661323f6&redirect_uri=http://localhost:8080/login/oauth2/code/kakao &response_type=code'"><img-->
+        <!--                src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/kakao_login_medium_wide.png"></button>-->
+
+    </div>
+</div>

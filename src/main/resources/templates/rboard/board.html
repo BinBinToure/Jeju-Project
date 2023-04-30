@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button onclick="saveReq()">글 작성</button>
+    <a href="/rboard/save">글 작성(링크)</a>
+    <button onclick="listReq()">글 목록</button>
+    <button onclick="pagingReq()">페이징 목록</button>
+</body>
+<script>
+    const saveReq = () => {         //     function saveReq() {} 와 동일
+        location.href = "/rboard/save";
+    }
+
+    const listReq = () => {
+        location.href = "/rboard/list";
+    }
+
+    const pagingReq = () => {
+        location.href = "/rboard/paging";
+    }
+</script>
+</html>

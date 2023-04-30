@@ -1,0 +1,14 @@
+.mapWrapper {
+    margin: 0 auto;
+    width: 670px;
+    min-height: 570px;
+}
+
+.blog {
+    text-align: center;
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/modal.css">
+<head>
+    <th:block th:replace="fragments/head :: headFragment"></th:block>
+</head>
+<body>
+<th:block th:replace="fragments/header :: header"></th:block>
+
+<div class="image-box">
+
+</div>
+<span class="h1-wrap"></span>
+<div class="board-box">
+    <h1 class="h1">커뮤니티</h1>
+    <div class="board-header">
+        <div class="write">
+            <button onclick="saveReq()" class="button">글쓰기</button>
+        </div>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+    <th scope="col" class="col">글번호</th>
+    <th scope="col2" class="col">제목</th>
+    <th scope="col" class="col">작성자</th>
+    <th scope="col" class="col">작성일</th>
+    <th scope="col" class="col">조회수</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="rboard: ${rboardList}">
+    <th scope="row" class="row" th:text="${rboard.id}"></th>
+    <td class="rows"><a th:href="@{|/rboard/${rboard.id}|(page=${rboardList.number + 1})}" th:text="${rboard.rboardTitle}"></a></td>
+    <td class="rows" th:text="${rboard.createdBy}"></td>
+    <td class="rows" th:text="*{#temporals.format(rboard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+    <td class="rows" th:text="${rboard.rboardHits}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<!-- 첫번째 페이지로 이동 -->
+<!-- /rboard/paging?page=1 -->
+        <ul class="pagination h-100 justify-content-center align-items-center page-ul">
+            <li class="page-item " >
+<a th:href="@{/rboard/paging(page=1)}" class="page-link">First</a>
+            </li>
+<!-- 이전 링크 활성화 비활성화 -->
+<!-- rboardList.getNumber() 사용자:2페이지 getNumber()=1 -->
+            <li class="page-item " >
+<a th:href="${rboardList.first} ? '#' : @{/rboard/paging(page=${rboardList.number})}" class="page-link">prev</a>
+            </li>
+<!-- 페이지 번호 링크(현재 페이지는 숫자만)
+        for(int page=startPage; page<=endPage; page++)-->
+            <li class="page-item " >
+                <a class="page-link">
+<span th:each="page: ${#numbers.sequence(startPage, endPage)}">
+
+    <span th:if="${page == rboardList.number + 1}" th:text="${page}"></span>
+      <span th:unless="${page == rboardList.number + 1}">
+        <a th:href="@{/rboard/paging(page=${page})}" th:text="${page}"></a>
+    </span>
+</span>
+
+
+<!-- 다음 링크 활성화 비활성화
+    사용자: 2페이지, getNumber: 1, 3페이지-->
+            <li class="page-item">
+<a th:href="${rboardList.last} ? '#' : @{/rboard/paging(page=${rboardList.number + 2})}" class="page-link">next</a>
+            </li>
+<!-- 마지막 페이지로 이동 -->
+            <li class="page-item">
+<a th:href="@{/rboard/paging(page=${rboardList.totalPages})}" class="page-link">Last</a>
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+  const saveReq = () => {
+    location.href = "/rboard/save";
+  }
+
+</script>
+<div th:replace="fragments/footer::footer"></div>
+</html>

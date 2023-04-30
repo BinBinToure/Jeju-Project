@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!--      layout:decorate="~{layouts/layout1}">-->
+
+<!--헤드-->
+<th:block th:replace="fragments/head :: headFragment"></th:block>
+
+<link rel="stylesheet" href="/css/goods.css">
+
+<th:block th:replace="fragments/header :: header"></th:block>
+<!--&lt;!&ndash; 사용자 CSS 추가 &ndash;&gt;-->
+<!--<th:block layout:fragment="css">-->
+<!--  <style>-->
+<!--    .carousel-inner > .item {-->
+<!--      height: 350px;-->
+<!--    }-->
+<!--    .margin{-->
+<!--      margin-bottom:30px;-->
+<!--    }-->
+<!--    .banner{-->
+<!--      height: 300px;-->
+<!--      position: absolute; top:0; left: 0;-->
+<!--      width: 100%;-->
+<!--      height: 100%;-->
+<!--    }-->
+<!--    .card-text{-->
+<!--      text-overflow: ellipsis;-->
+<!--      white-space: nowrap;-->
+<!--      overflow: hidden;-->
+<!--    }-->
+<!--    a:hover{-->
+<!--      text-decoration:none;-->
+<!--    }-->
+<!--    .center{-->
+<!--      text-align:center;-->
+<!--    }-->
+<!--  </style>-->
+<!--</th:block>-->
+
+<div layout:fragment="content">
+  <!--  슬라이드-->
+  <div class="slide slide_wrap">
+    <div class="slide_item item1 fade">
+      <div style="position:absolute; font-size:50px; margin-top: 150px; margin-left: 250px;">
+      <p style=" line-height: 1.16;">제주에서도 가전은 고급스럽게</p>
+        <strong style="font-weight:700; line-height: 1.16;">가전특집 기획전</strong><br/>
+        <p style="font-size:24px; margin-top:24px; line-height: 1.45;">실내 공기부터 의류, 침구 관리까지<br/>
+        집에서 쓰던 가전 그대로</p>
+      </div>
+      <a href="#"><img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/shopshop1.png" alt="슬라이드사진"/></a></div>
+    <div class="slide_item item2 fade"><a href="#">
+      <div style="position:absolute; font-size:50px; margin-top: 150px; margin-left: 250px;">
+        <p style=" line-height: 1.16;">2023 신년 특별 기획전</p>
+        <strong style="font-weight:700; line-height: 1.16;">직영몰 단독 특가 모음</strong><br/>
+        <p style="font-size:24px; margin-top:24px; line-height: 1.45;">새해 맞이 특가 상품으로<br/>
+          풍성하고 알찬 새해 되세요</p>
+      </div><img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/shopshop2.png" alt="슬라이드사진"/></a></div>
+    <div class="slide_item item3 fade"><a href="#">
+      <div style="position:absolute; font-size:50px; margin-top: 150px; margin-left: 250px;">
+        <p style=" line-height: 1.16;">제주에서도 놓칠 수 없는 운동!</p>
+        <strong style="font-weight:700; line-height: 1.16;">홈트레이닝 기획전</strong><br/>
+        <p style="font-size:24px; margin-top:24px; line-height: 1.45;">시간&장소에 구애받지 않는 홈트로<br/>
+          2023년엔 다이어트 성공하세요!</p>
+      </div><img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/shopshop3.png" alt="슬라이드사진"/></a></div>
+
+    <div class="slide_prev_button slide_button prev">prev</div>
+    <div class="slide_next_button slide_button next">next</div>
+    <ul class="slide_pagination"></ul>
+  </div>
+
+  <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
+  <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}">
+    <p th:text="${itemSearchDto.searchQuery} + '검색 결과'"></p>
+  </div>
+  <div class="marginBox"></div>
+  <div class="itemContainer">
+    <th:block th:each="item, status: ${items.getContent()}">
+      <div class="item item1">
+        <a th:href="'/item/' +${item.id}">
+          <div class="imgBox">
+            <img th:src="${item.imgUrl}" th:alt="${item.itemNm}" height="350">
+          </div>
+          <div style="text-align: center" class="textBox">
+            <h4>[[${item.itemNm}]]</h4>
+<!--            <h3>[[${item.price}]]원</h3>-->
+<!--            <p>[[${item.itemDetail}]]</p>-->
+          </div>
+        </a>
+      </div>
+    </th:block>
+  </div>
+
+  <div class="pageBox" th:with="start=${(items.number/maxPage)*maxPage + 1}, end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})">
+    <ul>
+
+      <li th:classappend="${items.number eq 0}?'disabled':''">
+        <a th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number-1}}" aria-label='Previous'>
+          <span aria-hidden='true'>Prev</span>
+        </a>
+      </li>
+
+      <li th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${items.number eq page-1}?'active':''">
+        <a th:href="@{'/' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${page-1}}" th:inline="text">[[${page}]]</a>
+      </li>
+
+      <li th:classappend="${items.number+1 ge items.totalPages}?'disabled':''">
+        <a th:href="@{'/' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number+1}}" aria-label='Next'>
+          <span aria-hidden='true'>Next</span>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+
+</div>
+
+<th:block th:replace="fragments/footer :: footer"></th:block>
+<script src="/js/goods.js"></script>
+
+</html>

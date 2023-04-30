@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>지역 리스트</title>
+    <th:block th:replace="fragments/head :: headFragment"></th:block>
+    <link rel="stylesheet" href="/css/courseList.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f2f40eee94.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/footer.css">
+    <script src="https://kit.fontawesome.com/f2f40eee94.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/header.css">
+</head>
+<body>
+<!--nav start-->
+
+<!--헤더-->
+<!-- 로그인 -->
+<th:block th:replace="fragments/header :: header"></th:block>
+
+<!--course start-->
+<div class="course-container">
+    <div class = "img-link">
+        <a class="img-button" href="/where/stay1">
+            <img src = "https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/제주시서부권.jpg">
+        </a>
+        <a href="/where/stay1">
+            <div class = "img-link-text">제주시 서부권</div>
+        </a>
+    </div>
+</div>
+<br>
+<div class="course-container">
+    <div class = "img-link">
+        <a class="img-button" href="/where/stay2">
+            <img src = "https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/제주시.jpg">
+        </a>
+        <a href="/where/stay2">
+            <div class = "img-link-text">제주시</div>
+        </a>
+    </div>
+</div>
+<br>
+<div class="course-container">
+    <div class = "img-link">
+        <a class="img-button" href="/where/stay3">
+            <img src = "https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/제주시동부권.jpg">
+        </a>
+        <a href="/where/stay3">
+            <div class = "img-link-text">제주시 동부권</div>
+        </a>
+    </div>
+</div>
+<br>
+<div class="course-container">
+    <div class = "img-link">
+        <a class="img-button" href="/where/stay4">
+            <img src = "https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/서귀포시서부권.jpg">
+        </a>
+        <a href="/where/stay4">
+            <div class = "img-link-text">서귀포시 서부권</div>
+        </a>
+    </div>
+</div>
+<br>
+<div class="course-container">
+    <div class = "img-link">
+        <a class="img-button" href="/where/stay5">
+            <img src = "https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/서귀포시.jpg">
+        </a>
+        <a href="/where/stay5">
+            <div class = "img-link-text">서귀포시</div>
+        </a>
+    </div>
+</div>
+<br>
+<div class="course-container">
+    <div class = "img-link">
+        <a class="img-button" href="/where/stay6">
+            <img src = "https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/서귀포동부권.jpg">
+        </a>
+        <a href="/where/stay6">
+            <div class = "img-link-text">서귀포시 동부권</div>
+        </a>
+    </div>
+</div>
+<br>
+
+<!--course end-->
+
+<!--푸터-->
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

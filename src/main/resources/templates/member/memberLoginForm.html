@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<!--<head>-->
+<!--  <meta name="_csrf" th:content="${_csrf.token}"/>-->
+<!--  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>-->
+<!--</head>-->
+
+
+<div layout:fragment="content">
+  <form role="form" method="post" action="/members/login">
+
+    <div>
+      <label th:for="email">이메일주소</label>
+      <input type="email" name="email" placeholder="이메일을 입력해주세요">
+    </div>
+
+    <div>
+      <label th:for="passowrd">비밀번호</label>
+      <input type="password" name="password" placeholder="비밀번호 입력">
+    </div>
+
+    <p th:if="${loginErrorMsg}" th:text="${loginErrorMsg}"></p>
+    <button>로그인</button>
+<!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
+
+  </form>
+  <button type="button" onclick="location.href='/members/new'">회원가입</button> <br>
+  <button type="button" onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=04fd96b421779ce995221b17661323f6&redirect_uri=http://localhost:8080/login/oauth2/code/kakao &response_type=code'"><img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/kakao_login_medium_wide.png"></button>
+</div>
+</html>

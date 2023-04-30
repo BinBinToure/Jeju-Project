@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>한달살이</title>
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+        .wrap {
+            position: absolute;
+            left: 0;
+            bottom: 40px;
+            width: 288px;
+            height: 132px;
+            margin-left: -144px;
+            text-align: left;
+            overflow: hidden;
+            font-size: 12px;
+            font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+            line-height: 1.5;
+        }
+
+        .wrap * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .wrap .info {
+            width: 286px;
+            height: 120px;
+            border-radius: 5px;
+            border-bottom: 2px solid #ccc;
+            border-right: 1px solid #ccc;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .wrap .info:nth-child(1) {
+            border: 0;
+            box-shadow: 0px 1px 2px #888;
+        }
+
+        .info .title {
+            padding: 5px 0 0 10px;
+            height: 30px;
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .info .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #888;
+            width: 17px;
+            height: 17px;
+            background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
+        }
+
+        .info .close:hover {
+            cursor: pointer;
+        }
+
+        .info .body {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info .desc {
+            position: relative;
+            margin: 13px 0 0 90px;
+            height: 75px;
+        }
+
+        .desc .ellipsis {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .desc .jibun {
+            font-size: 11px;
+            color: #888;
+            margin-top: -2px;
+        }
+
+        .info .img {
+            position: absolute;
+            top: 6px;
+            left: 5px;
+            width: 73px;
+            height: 71px;
+            border: 1px solid #ddd;
+            color: #888;
+            overflow: hidden;
+        }
+
+        .info:after {
+            content: '';
+            position: absolute;
+            margin-left: -12px;
+            left: 50%;
+            bottom: 0;
+            width: 22px;
+            height: 12px;
+            background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+        }
+
+        .info .link {
+            color: #5085BB;
+        }
+
+        img {
+            width: 15px;
+            height: 15px;
+        }
+
+        div > a {
+            font-size: 14px;
+            font-family: 'Jua', sans-serif;
+        }
+        a:hover{
+            display: unset;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/stay.css">
+    <!--헤드-->
+    <th:block th:replace="fragments/head :: headFragment"></th:block>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+<th:block th:replace="fragments/header :: header"></th:block>
+
+<style>
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+    a:hover {
+        display: unset;
+    }
+
+    /* Tab style */
+    *{margin:0;padding:0}
+    .allWrap{width: 800px;margin:0 auto;}
+    .tabBox{margin:20px 0}
+    .tab-link{width: 47%;display: inline-block;padding:10px;text-align: center;background-color:gray;border-radius: 20px;color:#fff;cursor: pointer;
+    }
+    .tab-link.current{
+        background-color: #de4c4c;
+        font-weight: 600;
+    }
+    .tab-content{
+        display: none;
+    }
+    .tab-content.current{
+        display: block;
+        width: 760px;
+        /*height: 500px;*/
+        background-color:white;
+        font-size: 30px;
+        text-align: center;
+        /*line-height: 250px;*/
+    }
+
+</style>
+
+<script
+        src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"></script>
+
+<div class="b-example-divider"></div>
+
+<div class="container col-xxl-8 px-4 py-5">
+<div style="margin-left: 70px; width: 1900px;">
+        <div class="col-10 col-sm-8 col-lg-6" style="text-align: center;">
+            <h1 class="display-5 fw-bold lh-1 mb-3">한달살이는 서귀포시에서~</h1>
+            <p class="lead">자연경관이 뛰어나고, 기후가 온화하여 천혜의 관광지 서귀포시!<br>
+                천지연·천제연·정방폭포 및 해식동·외돌개 등 해안 경승지, 숲섬·문섬·새섬·범섬 등 <br>
+                다수의 관광지에 편리한 교통을 자랑하는 서귀포시내 권역입니다.</p>
+        </div>
+</div>
+<!--        <div class="col-lg-6">-->
+<!--            <h1 class="display-5 fw-bold lh-1 mb-3">서귀포시</h1>-->
+<!--            <p class="lead">제주특별자치도 남부에 위치한 행정시. 대한민국에서 가장 남쪽에 있는 도시로, 한라산의 남쪽에 있어 흔히 산남(山南)이라고도 불린다. 동중국해[3]와 접하고 있는 지역이다. 북으로 제주시와 접하며, 제주시가 제주도의 행정 중심지라면 서귀포시는 제주도 관광의 메카라고 할 수 있을 정도로 관광지는 대부분 서귀포시 쪽에 몰려 있다.</p>-->
+<!--        </div>-->
+
+
+</div>
+
+
+<div class="b-example-divider"></div>
+
+
+<div class="allWrap">
+    <div class="tabBox">
+        <p class="tab-link current" data-tab="tab-1"><span><img src="http://mmctxt.com/link/img/icon01.png" alt="icon"></span> 호텔</p>
+        <p class="tab-link"  data-tab="tab-2"><span><img src="http://mmctxt.com/link/img/icon02.png" alt="icon"></span> 기타 숙소</p>
+        <p class="tab-link"  data-tab="tab-3"><span><img src="http://mmctxt.com/link/img/icon01.png" alt="icon"></span> 음식점</p>
+        <p class="tab-link"  data-tab="tab-4"><span><img src="http://mmctxt.com/link/img/icon02.png" alt="icon"></span> 카페</p>
+        <p class="tab-link"  data-tab="tab-5"><span><img src="http://mmctxt.com/link/img/icon02.png" alt="icon"></span> 관광 명소</p>
+        <p class="tab-link"  data-tab="tab-6"><span><img src="http://mmctxt.com/link/img/icon01.png" alt="icon"></span> 공공 기관</p>
+    </div>
+
+    <div  id="tab-1" class="tab-content current">
+
+        <div id="map1" style="width:760px;height:500px;"></div>
+
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc21730f86b17af444ee67c76f8a4059"></script>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            var mapContainer1 = document.getElementById('map1'), // 지도를 표시할 div
+                mapOption1 = {
+                    center: new kakao.maps.LatLng(33.23789683879093, 126.50859997453584), // 지도의 중심좌표
+                    level: 8 // 지도의 확대 레벨
+                };
+
+            // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+            var map1 = new kakao.maps.Map(mapContainer1, mapOption1);
+
+            // <a th:href="${jeju.address}">
+            var positions = [
+                /*[# th:each="jeju : ${jejuList}" th:if="${jeju.flag.toString().equals('호텔')}"]*/
+
+                {
+                    title : '<div style="padding:10px;, bottom:-30px; position: relative;">&nbsp<a href="[(${jeju.address})]" >[(${jeju.name})]</a>' +
+                        '&nbsp<a href="https://map.kakao.com/link/to/[(${jeju.name})],[[${jeju.latitude}]], [[${jeju.longitude}]]" ' +
+                        'style="">' +
+                        '&nbsp<img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/kakaomap.png" style=""> </a>'
+                        +   '&nbsp<a href="http://localhost:8080/notice/read?mno=47&page=1"><img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/star.png" ></a></div>',
+                    latlng : new kakao.maps.LatLng(/*[[${jeju.latitude}]]*/, /*[[${jeju.longitude}]]*/),
+                    content : '<div>[(${jeju.name})]</div>'
+                },
+                /*[/]*/
+            ];
+
+            for(let i=0; i < positions.length; i++){
+                var data = positions[i];
+                displayMarker(data);
+            }
+
+            // 지도에 마커를 표시하는 함수입니다
+            function displayMarker(data) {
+
+                var imageSrc = "https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/test1.png";
+                var imageSize = new kakao.maps.Size(24, 30);
+                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                var marker = new kakao.maps.Marker({
+                    map     : map1,
+                    position: data.latlng,
+                    image   : markerImage
+                });
+                var overlay = new kakao.maps.CustomOverlay({
+                    yAnchor : 1.2,
+                    position: marker.getPosition()
+                });
+
+                var content = document.createElement('div');
+                content.innerHTML = data.title;
+                content.style.cssText = 'background: white; border: 1px solid black;'
+
+                var closeBtn = document.createElement('button');
+                closeBtn.innerHTML = 'x';
+                closeBtn.style.cssText = "    position: absolute;\n" +
+                    "    top: -0.8px;\n" +
+                    "    right: -23px;\n";
+                closeBtn.onclick = function () {
+                    overlay.setMap(null);
+                };
+                content.appendChild(closeBtn);
+                overlay.setContent(content);
+
+                kakao.maps.event.addListener(marker, 'click', function () {
+                    overlay.setMap(map1);
+                });
+                // kakao.maps.event.addListener(map1, 'click', function() {
+                //     overlay.setMap(null)
+                // })
+            };
+
+
+            /*]]>*/
+        </script>
+
+
+        <div style="text-align: left; padding: 15px;">
+            <div th:each="jeju : ${jejuList}" th:if="${jeju.flag.toString().equals('호텔') and jeju.rating == '5' and jeju.area.toString().equals('서귀포시')}">
+                · <a th:href="${jeju.address}"><span style="padding: 10px;" th:text="${jeju.name}"></span></a>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="tab-2" class="tab-content">
+        <div id="map2" style="width:760px;height:500px;"></div>
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            var mapContainer2 = document.getElementById('map2'), // 지도를 표시할 div
+                mapOption2 = {
+                    center: new kakao.maps.LatLng(33.24582462847569, 126.56237320901901), // 지도의 중심좌표
+                    level: 8 // 지도의 확대 레벨
+                };
+
+            // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+            var map2 = new kakao.maps.Map(mapContainer2, mapOption2);
+
+            var positions = [
+                /*[# th:each="jeju : ${jejuList}" th:if="${jeju.flag.toString().equals('기타 숙소')}"]*/
+
+                {
+                    title : '<div style="padding:10px;, bottom:-30px; position: relative;">&nbsp<a href="[(${jeju.address})]" >[(${jeju.name})]</a>' +
+                        '&nbsp<a href="https://map.kakao.com/link/to/[(${jeju.name})],[[${jeju.latitude}]], [[${jeju.longitude}]]" ' +
+                        'style="">' +
+                        '&nbsp<img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/kakaomap.png" style=""></a>'
+                        +   '&nbsp<a href="http://localhost:8080/notice/read?mno=47&page=1"><img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/star.png" style=""></a></div>',
+                    latlng : new kakao.maps.LatLng(/*[[${jeju.latitude}]]*/, /*[[${jeju.longitude}]]*/),
+                    content : '<div>[(${jeju.name})]</div>'
+                },
+                /*[/]*/
+            ];
+
+            for(let i=0; i < positions.length; i++){
+                var data = positions[i];
+                displayMarker(data);
+            }
+
+            // 지도에 마커를 표시하는 함수입니다
+            function displayMarker(data) {
+
+                var imageSrc = "https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/test2.png";
+                var imageSize = new kakao.maps.Size(24, 30);
+                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                var marker = new kakao.maps.Marker({
+                    map     : map2,
+                    position: data.latlng,
+                    image   : markerImage
+                });
+                var overlay = new kakao.maps.CustomOverlay({
+                    yAnchor : 1.2,
+                    position: marker.getPosition()
+                });
+
+                var content = document.createElement('div');
+                content.innerHTML = data.title;
+                content.style.cssText = 'background: white; border: 1px solid black position: relative;\n'
+                    + '    left: -60px;\n' + '}';
+
+                var closeBtn = document.createElement('button');
+                closeBtn.innerHTML = 'x';
+                closeBtn.style.cssText = "    position: absolute;\n" +
+                    "    top: -0.8px;\n" +
+                    "    right: -23px;\n";
+                closeBtn.onclick = function () {
+                    overlay.setMap(null);
+                };
+                content.appendChild(closeBtn);
+                overlay.setContent(content);
+
+                kakao.maps.event.addListener(marker, 'click', function () {
+                    overlay.setMap(map2);
+                });
+                // kakao.maps.event.addListener(map2, 'click', function() {
+                //     overlay.setMap(null)
+                // })
+            };
+
+
+            /*]]>*/
+        </script>
+    </div>
+
+    <div  id="tab-3" class="tab-content">
+        <div id="map3" style="width:760px;height:500px;"></div>
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            var mapContainer3 = document.getElementById('map3'), // 지도를 표시할 div
+                mapOption3 = {
+                    center: new kakao.maps.LatLng(33.24582462847569, 126.56237320901901), // 지도의 중심좌표
+                    level: 8 // 지도의 확대 레벨
+                };
+
+            // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+            var map3 = new kakao.maps.Map(mapContainer3, mapOption3);
+
+            var positions = [
+                /*[# th:each="jeju : ${jejuList}" th:if="${jeju.flag.toString().equals('음식점')}"]*/
+
+                {
+                    title : '<div style="padding:10px;, bottom:-30px; position: relative;">&nbsp<a href="[(${jeju.address})]" >[(${jeju.name})]</a>' +
+                        '&nbsp<a href="https://map.kakao.com/link/to/[(${jeju.name})],[[${jeju.latitude}]], [[${jeju.longitude}]]" ' +
+                        'style="">' +
+                        '&nbsp<img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/kakaomap.png" style=""></a>'
+                        +   '&nbsp<a href="[(${jeju.reviewAdd})]"><img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/star.png" style=""></a></div>',
+                    latlng : new kakao.maps.LatLng(/*[[${jeju.latitude}]]*/, /*[[${jeju.longitude}]]*/),
+                    content : '<div>[(${jeju.name})]</div>'
+                },
+                /*[/]*/
+            ];
+
+            for(let i=0; i < positions.length; i++){
+                var data = positions[i];
+                displayMarker(data);
+            }
+
+            // 지도에 마커를 표시하는 함수입니다
+            function displayMarker(data) {
+
+                var imageSrc = "https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/test3.png";
+                var imageSize = new kakao.maps.Size(24, 30);
+                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                var marker = new kakao.maps.Marker({
+                    map     : map3,
+                    position: data.latlng,
+                    image   : markerImage
+                });
+                var overlay = new kakao.maps.CustomOverlay({
+                    yAnchor : 1.2,
+                    position: marker.getPosition()
+                });
+
+                var content = document.createElement('div');
+                content.innerHTML = data.title;
+                content.style.cssText = 'background: white; border: 1px solid black position: relative;\n'
+                    + '    left: -60px;\n' + '}';
+
+                var closeBtn = document.createElement('button');
+                closeBtn.innerHTML = 'x';
+                closeBtn.style.cssText = "    position: absolute;\n" +
+                    "    top: -0.8px;\n" +
+                    "    right: -23px;\n";
+                closeBtn.onclick = function () {
+                    overlay.setMap(null);
+                };
+                content.appendChild(closeBtn);
+                overlay.setContent(content);
+
+                kakao.maps.event.addListener(marker, 'click', function () {
+                    overlay.setMap(map3);
+                });
+                // kakao.maps.event.addListener(map3, 'click', function() {
+                //     overlay.setMap(null)
+                // })
+            };
+
+            /*]]>*/
+        </script>
+    </div>
+
+    <div  id="tab-4" class="tab-content">
+        <div id="map4" style="width:760px;height:500px;"></div>
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            var mapContainer4 = document.getElementById('map4'), // 지도를 표시할 div
+                mapOption4 = {
+                    center: new kakao.maps.LatLng(33.24582462847569, 126.56237320901901), // 지도의 중심좌표
+                    level: 8 // 지도의 확대 레벨
+                };
+
+            // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+            var map4 = new kakao.maps.Map(mapContainer4, mapOption4);
+
+            var positions = [
+                /*[# th:each="jeju : ${jejuList}" th:if="${jeju.flag.toString().equals('카페')}"]*/
+
+                {
+                    title : '<div style="padding:10px;, bottom:-30px; position: relative;">&nbsp<a href="[(${jeju.address})]" >[(${jeju.name})]</a>' +
+                        '&nbsp<a href="https://map.kakao.com/link/to/[(${jeju.name})],[[${jeju.latitude}]], [[${jeju.longitude}]]" ' +
+                        'style="">' +
+                        '&nbsp<img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/kakaomap.png" style=""></a>'
+                        +   '&nbsp<a href="[(${jeju.reviewAdd})]"><img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/star.png" style=""></a></div>',
+                    latlng : new kakao.maps.LatLng(/*[[${jeju.latitude}]]*/, /*[[${jeju.longitude}]]*/),
+                    content : '<div>[(${jeju.name})]</div>'
+                },
+                /*[/]*/
+            ];
+
+            for(let i=0; i < positions.length; i++){
+                var data = positions[i];
+                displayMarker(data);
+            }
+
+            // 지도에 마커를 표시하는 함수입니다
+            function displayMarker(data) {
+
+                var imageSrc = "https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/test4.png";
+                var imageSize = new kakao.maps.Size(24, 30);
+                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                var marker = new kakao.maps.Marker({
+                    map     : map4,
+                    position: data.latlng,
+                    image   : markerImage
+                });
+                var overlay = new kakao.maps.CustomOverlay({
+                    yAnchor : 1.2,
+                    position: marker.getPosition()
+                });
+
+                var content = document.createElement('div');
+                content.innerHTML = data.title;
+                content.style.cssText = 'background: white; border: 1px solid black position: relative;\n'
+                    + '    left: -60px;\n' + '}';
+
+                var closeBtn = document.createElement('button');
+                closeBtn.innerHTML = 'x';
+                closeBtn.style.cssText = "    position: absolute;\n" +
+                    "    top: -0.8px;\n" +
+                    "    right: -23px;\n";
+                closeBtn.onclick = function () {
+                    overlay.setMap(null);
+                };
+                content.appendChild(closeBtn);
+                overlay.setContent(content);
+
+                kakao.maps.event.addListener(marker, 'click', function () {
+                    overlay.setMap(map4);
+                });
+                // kakao.maps.event.addListener(map4, 'click', function() {
+                //     overlay.setMap(null)
+                // })
+            };
+
+
+            /*]]>*/
+        </script>
+    </div>
+
+    <div  id="tab-5" class="tab-content">
+        <div id="map5" style="width:760px;height:500px;"></div>
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            var mapContainer5 = document.getElementById('map5'), // 지도를 표시할 div
+                mapOption5 = {
+                    center: new kakao.maps.LatLng(33.24582462847569, 126.56237320901901), // 지도의 중심좌표
+                    level: 8 // 지도의 확대 레벨
+                };
+
+            // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+            var map5 = new kakao.maps.Map(mapContainer5, mapOption5);
+
+            var positions = [
+                /*[# th:each="jeju : ${jejuList}" th:if="${jeju.flag.toString().equals('관광명소')}"]*/
+
+                {
+                    title : '<div style="padding:10px;, bottom:-30px; position: relative;">&nbsp<a href="[(${jeju.address})]" >[(${jeju.name})]</a>' +
+                        '&nbsp<a href="https://map.kakao.com/link/to/[(${jeju.name})],[[${jeju.latitude}]], [[${jeju.longitude}]]" ' +
+                        'style="">' +
+                        '&nbsp<img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/kakaomap.png" style=""></a>'
+                        +   '&nbsp<a href="[(${jeju.reviewAdd})]"><img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/star.png" style=""></a></div>',
+                    latlng : new kakao.maps.LatLng(/*[[${jeju.latitude}]]*/, /*[[${jeju.longitude}]]*/),
+                    content : '<div>[(${jeju.name})]</div>'
+                },
+                /*[/]*/
+            ];
+
+            for(let i=0; i < positions.length; i++){
+                var data = positions[i];
+                displayMarker(data);
+            }
+
+            // 지도에 마커를 표시하는 함수입니다
+            function displayMarker(data) {
+
+                var imageSrc = "https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/test4.png";
+                var imageSize = new kakao.maps.Size(24, 30);
+                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                var marker = new kakao.maps.Marker({
+                    map     : map5,
+                    position: data.latlng,
+                    image   : markerImage
+                });
+                var overlay = new kakao.maps.CustomOverlay({
+                    yAnchor : 1.2,
+                    position: marker.getPosition()
+                });
+
+                var content = document.createElement('div');
+                content.innerHTML = data.title;
+                content.style.cssText = 'background: white; border: 1px solid black position: relative;\n'
+                    + '    left: -60px;\n' + '}';
+
+                var closeBtn = document.createElement('button');
+                closeBtn.innerHTML = 'x';
+                closeBtn.style.cssText = "    position: absolute;\n" +
+                    "    top: -0.8px;\n" +
+                    "    right: -23px;\n";
+                closeBtn.onclick = function () {
+                    overlay.setMap(null);
+                };
+                content.appendChild(closeBtn);
+                overlay.setContent(content);
+
+                kakao.maps.event.addListener(marker, 'click', function () {
+                    overlay.setMap(map5);
+                });
+                // kakao.maps.event.addListener(map4, 'click', function() {
+                //     overlay.setMap(null)
+                // })
+            };
+
+
+            /*]]>*/
+        </script>
+    </div>
+
+    <div  id="tab-6" class="tab-content">
+        <div id="map6" style="width:760px;height:500px;"></div>
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            var mapContainer6 = document.getElementById('map6'), // 지도를 표시할 div
+                mapOption6 = {
+                    center: new kakao.maps.LatLng(33.24582462847569, 126.56237320901901), // 지도의 중심좌표
+                    level: 8 // 지도의 확대 레벨
+                };
+
+            // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+            var map6 = new kakao.maps.Map(mapContainer6, mapOption6);
+
+            var positions = [
+                /*[# th:each="jeju : ${jejuList}" th:if="${jeju.flag.toString().equals('공공 기관')}"]*/
+
+                {
+                    title : '<div style="padding:10px;, bottom:-30px; position: relative;">&nbsp<a href="[(${jeju.address})]" >[(${jeju.name})]</a>' +
+                        '&nbsp<a href="https://map.kakao.com/link/to/[(${jeju.name})],[[${jeju.latitude}]], [[${jeju.longitude}]]" ' +
+                        'style="">' +
+                        '&nbsp<img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/kakaomap.png" style=""></a>'
+                        +   '&nbsp<a href="[(${jeju.reviewAdd})]"><img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/star.png" style=""></a></div>',
+                    latlng : new kakao.maps.LatLng(/*[[${jeju.latitude}]]*/, /*[[${jeju.longitude}]]*/),
+                    content : '<div>[(${jeju.name})]</div>'
+                },
+                /*[/]*/
+            ];
+
+            for(let i=0; i < positions.length; i++){
+                var data = positions[i];
+                displayMarker(data);
+            }
+
+            // 지도에 마커를 표시하는 함수입니다
+            function displayMarker(data) {
+
+                var imageSrc = "https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/test4.png";
+                var imageSize = new kakao.maps.Size(24, 30);
+                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                var marker = new kakao.maps.Marker({
+                    map     : map6,
+                    position: data.latlng,
+                    image   : markerImage
+                });
+                var overlay = new kakao.maps.CustomOverlay({
+                    yAnchor : 1.2,
+                    position: marker.getPosition()
+                });
+
+                var content = document.createElement('div');
+                content.innerHTML = data.title;
+                content.style.cssText = 'background: white; border: 1px solid black position: relative;\n'
+                    + '    left: -60px;\n' + '}';
+
+                var closeBtn = document.createElement('button');
+                closeBtn.innerHTML = 'x';
+                closeBtn.style.cssText = "    position: absolute;\n" +
+                    "    top: -0.8px;\n" +
+                    "    right: -23px;\n";
+                closeBtn.onclick = function () {
+                    overlay.setMap(null);
+                };
+                content.appendChild(closeBtn);
+                overlay.setContent(content);
+
+                kakao.maps.event.addListener(marker, 'click', function () {
+                    overlay.setMap(map6);
+                });
+                // kakao.maps.event.addListener(map4, 'click', function() {
+                //     overlay.setMap(null)
+                // })
+            };
+
+
+            /*]]>*/
+        </script>
+
+    </div>
+</div>
+
+<br>
+<br>
+
+
+
+<hr/>
+<!--<div style="margin: 0 auto; width: 1000px; display: block;">-->
+    <div style="text-align: left;" th:each="blogInfo : ${blogList}" th:if="${blogInfo.address} == '서귀포시'
+    and ${#strings.contains(blogInfo.title,'한달살이')}">
+        <ul style="list-style: none;">
+<!--            <li><a th:href="${blogInfo.alink}"><h4 class="blog">[[${blogInfo.title}]]</h4></a></li>-->
+            <li><a th:href="${blogInfo.alink}"><h4 class="blog">[[${blogInfo.title}]]</h4></a></li>
+        </ul>
+    </div>
+<!--</div>-->
+
+
+
+<script>
+
+
+    $('.tab-link').click(function () {
+        var tab_id = $(this).attr('data-tab');
+
+        $('.tab-link').removeClass('current');
+        $('.tab-content').removeClass('current');
+
+        $(this).addClass('current');
+        $("#" + tab_id).addClass('current');
+
+        window.setTimeout(function() {
+            map2.relayout();
+            map2.setCenter(mapOption2.center);
+            map3.relayout();
+            map3.setCenter(mapOption3.center);
+            map4.relayout();
+            map4.setCenter(mapOption4.center);
+            map5.relayout();
+            map5.setCenter(mapOption5.center);
+            map6.relayout();
+            map6.setCenter(mapOption6.center);
+        }, 0);
+    });
+
+
+
+</script>
+
+<div class="row" style="margin-bottom:50px;">
+
+    <figure style="padding:0; text-align:center;">
+        <blockquote class="blockquote">
+            <p>한달살이 관련 사이트</p>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+            한달살이 관련 <cite title="Source Title">사이트 입니다.</cite>
+        </figcaption>
+    </figure>
+
+    <div class="col"></div>
+    <div class="card col" style="width: 18rem;">
+        <img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/logovisitjeju.png" style="width:200px; height:100px;padding-top: 10px;" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">제주관광공사</h5>
+            <p class="card-text">제주 관광 정보를 한 눈에!</p>
+            <a href="https://www.visitjeju.net/kr" class="btn btn-primary stretched-link">Visit Jeju</a>
+        </div>
+    </div>
+    <div class="card col" style="width: 18rem;">
+        <img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/logojejuolle.png" style="width:200px; height:100px;padding-top: 10px;" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">제주 올레</h5>
+            <p class="card-text">한국의 산티아고! 제주 올레 </p>
+            <a href="https://www.jejuolle.org/" class="btn btn-primary stretched-link">제주 올레</a>
+        </div>
+    </div>
+    <div class="card col" style="width: 18rem;">
+        <img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/logohallasan.png" style="width:200px; height:100px;padding-top: 10px;" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">한라산 국립공원</h5>
+            <p class="card-text">한라산 등산 정보제공 및 예약</p>
+            <a href="https://visithalla.jeju.go.kr/" class="btn btn-primary stretched-link">한라산국립공원</a>
+        </div>
+    </div>
+    <div class="col"></div>
+</div>
+
+
+<div class="row" style="margin-bottom:100px;">
+    <div class="col"></div>
+    <div class="card col" style="width: 18rem;">
+        <img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/logojeju.jpg" style="width:200px; height:100px;padding-top: 10px;" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">제주도</h5>
+            <p class="card-text">제주도에 관한 모든 것!</p>
+            <a href="https://www.jeju.go.kr/" class="btn btn-primary stretched-link">제주도청</a>
+        </div>
+    </div>
+    <div class="card col" style="width: 18rem;">
+        <img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/logojejubus.png" style="width:200px; height:100px;padding-top: 10px;" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">제주 버스정보 시스텝</h5>
+            <p class="card-text">대중교통 이용은 필수! 제주시의 버스 정보</p>
+            <a href="http://bus.jeju.go.kr/" class="btn btn-primary stretched-link">제주 버스</a>
+        </div>
+    </div>
+    <div class="card col" style="width: 18rem;">
+        <img src="https://raw.githubusercontent.com/BinBinToure/Dulle-gil/main/image/logovpass.png" style="width:200px; height:100px;padding-top: 10px;" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">여행의 발견! 브이패스</h5>
+            <p class="card-text">제주 추천 관광지를 제공하고 관광지의 이용권</p>
+            <a href="http://jeju.vpass.co.kr/" class="btn btn-primary stretched-link">제주 브이패스</a>
+        </div>
+    </div>
+    <div class="col"></div>
+</div>
+
+<th:block th:replace="fragments/footer :: footer"></th:block>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+
+</script>
+</body>
+</html>

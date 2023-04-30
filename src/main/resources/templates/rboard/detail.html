@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/board.css">
+    <th:block th:replace="fragments/head :: headFragment"></th:block>
+</head>
+<body>
+<div th:replace="fragments/header::header"></div>
+<div class="image-box">
+
+</div>
+<p sec:authorize="isAuthenticated()">
+    <span hidden sec:authentication="name" class="form-control" id="testEmail"></span>
+</p>
+<span class="h1-wrap"></span>
+<!--<h1 class="h1">상세 페이지</h1>-->
+
+<div class="">
+<!--    <div class="form-group">-->
+<!--        <label>번호</label>-->
+<!--        <input type="text" th:value="${rboard.id}" class="form-control" readonly></input>-->
+<!--    </div>-->
+    <div class="form-group">
+        <label>제목</label>
+        <input type="text" th:value="${rboard.rboardTitle}" class="form-control" readonly style="display:inline; width:670px;"></input>
+    </div>
+<!--    <div class="form-group">-->
+<!--        <label>작성자</label>-->
+<!--        <input th:value="${rboard.createdBy}" class="form-control"readonly></input>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--        <label>작성일</label>-->
+<!--        <input th:value="${rboard.regDate}" class="form-control" readonly></input>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--        <label>조회수</label>-->
+<!--        <input th:value="${rboard.rboardHits}" class="form-control" readonly></input>-->
+<!--    </div>-->
+    <div class="form-group">
+<!--        <label>내용</label>-->
+        <textarea th:value="${rboard.rboardContents}" class="form-control" readonly>[[${rboard.rboardContents}]]</textarea>
+    </div>
+    <div th:if="${rboard.fileAttached == 1}" class="form-group">    <!-- 1이면 보여주고 0이면 안보여줌-->
+<!--        <label>image</label>-->
+        <div th:each="fileName: ${rboard.storedFileName}"  class="form-control" readonly>
+            <img th:src="@{|/upload/${fileName}|}" alt="">
+        </div>
+    </div>
+</div>
+<div class="button-box">
+    <button onclick="listReq()" class="button">목록</button>
+    <button onclick="updateReq()" id="change" class="button">수정</button>
+    <button onclick="deleteReq()" class="button">삭제</button>
+</div>
+<!-- 댓글 작성 -->
+<div id="comment-write" style="text-align: center; margin-top: 50px;">
+    <div sec:authentication="name" id="commentWriter"></div>
+    <!--    <input type="text" id="commentWriter" placeholder="작성자">-->
+    <input type="text" id="commentContents" placeholder="내용">
+    <button id="comment-write-btn" onclick="commentWrite()" class="button">댓글 작성</button>
+</div>
+<style>
+    .card-body{
+                height:150px;
+                width:800px;
+                margin:0 auto;
+                cursor:pointer;
+                padding:30px;
+            }
+    .form-control{
+                margin:0 auto;
+    }
+    .card-text{
+                width:300px;
+    }
+    tr{
+        line-height:2em;
+    }
+    tr > th:nth-child(2){
+        width:150px;
+    }
+    tr > th:first-child{
+        width:27px;
+    }
+</style>
+<!-- 댓글 출력 -->
+<div id="comment-list" class="card-body">
+    <table>
+        <tr>
+                        <th>번호</th>
+            <th class="card-title">작성자</th>
+            <th class="card-text">내용</th>
+            <th>작성시간</th>
+        </tr>
+        <tr th:each="comment: ${commentList}">
+                        <td th:text="${comment.id}"></td>
+            <td th:text="${comment.commentWriter}"></td>
+            <td th:text="${comment.commentContents}"></td>
+            <td th:text="*{#temporals.format(comment.commentCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+<script th:inline="javascript">
+
+    const commentWrite = () => {
+        const writer = document.getElementById("commentWriter").innerHTML;
+        const contents = document.getElementById("commentContents").value;
+        const loginemail = document.getElementById('testEmail').innerHTML
+
+        console.log("작성자 : ", writer);
+        console.log("내용 : ", contents);
+        console.log("로그인 : ", loginemail);
+        const id = [[${rboard.id}]];    // 게시글 번호
+
+        $.ajax({        // ajax 내용 듣기
+            // 요청방식: post, 요청주소: /comment/save, 요청데이터: 작성자, 작성내용
+            type: "post",
+            url: "/comment/save",
+            data: {
+                "commentWriter": writer,
+                "commentContents": contents,
+                "rboardId": id
+            },
+            success: function (res) {
+                console.log("요청성공", res);
+                let output = "<table>";
+                output += "<tr><th>댓글번호</th>";
+                output += "<th>작성자</th>";
+                output += "<th>내용</th>";
+                output += "<th>작성시간</th></tr>";
+                for (let i in res) {
+                    output += "<tr>";
+                    output += "<td>" + res[i].id + "</td>";
+                    output += "<td>" + res[i].commentWriter + "</td>";
+                    output += "<td>" + res[i].commentContents + "</td>";
+                    output += "<td>" + res[i].commentCreatedTime + "</td>";
+                    output += "</tr>";
+                }
+                output += "</table>";
+                document.getElementById('comment-list').innerHTML = output;
+                document.getElementById('commentWriter').value = '';
+                document.getElementById('commentContents').value = '';
+            },
+            error: function (err) {
+                console.log("요청 실패", err);
+            }
+        });
+    }
+
+    const listReq = () => {
+        console.log("목록 요청");
+        const page = [[${page}]];
+        location.href = "/rboard/paging?page=" + page;
+    }
+    const updateReq = () => {
+        console.log("수정 요청");
+        const id = [[${rboard.id}]];
+        location.href = "/rboard/update/" + id;
+    }
+    const deleteReq = () => {
+        console.log("삭제 요청");
+        const id = [[${rboard.id}]];
+        location.href = "/rboard/delete/" + id;
+    }
+</script>
+<div th:replace="fragments/footer::footer"></div>
+</html>

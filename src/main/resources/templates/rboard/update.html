@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/rboard/update" method="post" name="updateForm">
+    <input type="hidden" name="id" th:value="${rboardUpdate.id}">
+    <input type="hidden" name="createdBy" th:value="${rboardUpdate.createdBy}" readonly> <br>
+    title: <input type="text" name="rboardTitle" th:value="${rboardUpdate.rboardTitle}"> <br>
+    contents: <textarea name="rboardContents" cols="30" rows="10" th:text="${rboardUpdate.rboardContents}"></textarea> <br>
+    <input type="hidden" name="rboardHits" th:value="${rboardUpdate.rboardHits}">
+    <input type="button" value="글수정" onclick="rboardUpdate()">
+</form>
+</body>
+<script th:inline="javascript">
+    const rboardUpdate = () => {
+        document.updateForm.submit();
+    }
+</script>
+</html>
