@@ -3,15 +3,16 @@
 <img width="242" alt="main_logo" src="https://user-images.githubusercontent.com/111488162/216569689-8437ca66-b1f5-4bf9-9c78-b1c2466cb9f7.png">
 
 📌Development Environment / 개발환경
-Java <hr>
+Java, python <hr>
+MySQL, RDS <hr>
 HTML5/CSS3 <hr>
 javascript , Ajax , jQuery <hr>
-JSON ,XML <hr>
 Spring Boot, JPA, gradle <hr>
 GIT <hr>
 
 📌Project / 프로젝트
-
+Java, MySQL, JPA, Spring boot, Spring Security 등을 이용한 한달살이 정보를 제공하고, <hr>
+이용자들간의 소통이 가능하며 필요한 물품 대여가 가능한 웹 서비스
 
 📌Contributions / 맡은 역할
 이정빈
