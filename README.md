@@ -2,9 +2,9 @@
 
 <img width="242" alt="main_logo" src="https://user-images.githubusercontent.com/111488162/216569689-8437ca66-b1f5-4bf9-9c78-b1c2466cb9f7.png">
 
-📌Development Environment / 개발환경
-Java, python <hr>
-MySQL, RDS <hr>
+📌Development Environment / 개발환경 <hr>
+Java, python  
+MySQL, RDS  
 HTML5/CSS3 <hr>
 javascript , Ajax , jQuery <hr>
 Spring Boot, JPA, gradle <hr>
