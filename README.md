@@ -11,7 +11,7 @@ Spring Boot, JPA, gradle  <br>
 GIT  <br>  
 <hr>
 
-<h1>📌Project / 프로젝트</h1> <br>  
+<h1>📌Project / 프로젝트</h1> <br> <hr> 
 Java, MySQL, JPA, Spring boot, Spring Security 등을 이용한 한달살이 정보를 제공하고, <br>     
 이용자들간의 소통이 가능하며 필요한 물품 대여가 가능한 웹 서비스
 <hr>
